@@ -1,0 +1,25 @@
+#!groovy
+//noinspection GroovyUnusedAssignment
+@Library("Infrastructure") _
+
+properties([
+    parameters([
+        booleanParam(name: 'PLAN_ONLY', defaultValue: false, description: 'set to true for skipping terraform apply')
+    ])
+])
+
+import uk.gov.hmcts.contino.Environment
+
+planOnly = params.PLAN_ONLY
+Environment environment = new Environment(env)
+
+onMaster {
+  sharedInfrastructurePipeline('rhubarb', environment.nonProdName, 'nonprod', planOnly)
+  sharedInfrastructurePipeline('rhubarb', environment.demoName, 'nonprod', planOnly)
+  sharedInfrastructurePipeline('rhubarb', environment.prodName, 'prod', planOnly)
+}
+
+onPR {
+  sharedInfrastructurePipeline('rhubarb', environment.previewName, 'nonprod', planOnly)
+  sharedInfrastructurePipeline('rhubarb', environment.demoName, 'nonprod', planOnly)
+}
