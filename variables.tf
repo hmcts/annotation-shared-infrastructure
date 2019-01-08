@@ -5,7 +5,7 @@ variable "subscription" {}
 variable "product" {
   type        = "string"
   description = "The name of your application"
-  default     = "rhubarb"
+  default     = "annotation" // or
 }
 
 variable "env" {
@@ -124,3 +124,7 @@ variable "nr_of_tm_endpoints" {
   default     = "3"
   description = "Number of endpoints that TM will be pointing to this must be provided upfront and also depends on how many times we call was module"
 }
+
+variable "external_cert_name" {}
+variable "external_cert_vault_uri" {}
+variable "ilbIp" {}
