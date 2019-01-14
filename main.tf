@@ -17,7 +17,7 @@ locals {
   )}"
 }
 
-resource "azurerm_resource_group" "shared_resource_group" {
+resource "azurerm_resource_group" "rg" {
   name = "${local.rg_name}"
   location = "${var.location}"
   tags {

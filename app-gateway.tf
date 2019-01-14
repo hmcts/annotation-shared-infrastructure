@@ -9,7 +9,7 @@ module "appGw" {
   subscription      = "${var.subscription}"
   location          = "${var.location}"
   wafName           = "${var.product}-shared-waf"
-  resourcegroupname = "${azurerm_resource_group.shared_resource_group.name}"
+  resourcegroupname = "${azurerm_resource_group.rg.name}"
 
   # vNet connections
   gatewayIpConfigurations = [
@@ -65,7 +65,7 @@ module "appGw" {
       PickHostNameFromBackendAddress = "False"
       HostName                       = "${var.product}-${var.env}.service.core-compute-${var.env}.internal"
     },
-| ]
+ ]
 
   # Request routing rules
   requestRoutingRules = [
